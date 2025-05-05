@@ -1,0 +1,16 @@
+- [ ] SwayWM
+- [ ] Pomodoro
+- [ ] Terminal - Kitty
+- [ ] Shell - zsh
+- [ ] ssh-agent
+- [ ] zoxide
+- [ ] file manager
+- [ ] Neovim
+- [ ] Bar - waybar
+- [ ] WiFi
+- [ ] Bluetooth
+- [ ] Launcher - rofi
+- [ ] Display Manager
+- [ ] Lock Screen
+- [ ] notification
+- [ ] calendar

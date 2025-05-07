@@ -1,7 +1,12 @@
 - [ ] SwayWM
-- [ ] Pomodoro
+- [ ] Pomodoro timer
 - [ ] Terminal - Kitty
 - [ ] Shell - zsh
+- [ ] music - ncspot/spotify
+- [ ] audio control
+- [ ] themeing - gth and icons
+- [ ] qmk
+- [ ] eww ?
 - [ ] ssh-agent
 - [ ] zoxide
 - [ ] file manager
@@ -14,3 +19,4 @@
 - [ ] Lock Screen
 - [ ] notification
 - [ ] calendar
+- [ ] cli tools (fzf, fd, ripgrep)

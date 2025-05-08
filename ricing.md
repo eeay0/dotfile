@@ -1,20 +1,20 @@
 - [ ] SwayWM
 - [ ] Pomodoro timer
-- [ ] Terminal - Kitty
-- [ ] Shell - zsh
+- [/] Terminal - wezterm
+- [X] Shell - zsh
 - [ ] music - ncspot/spotify
 - [ ] audio control
 - [ ] themeing - gth and icons
 - [ ] qmk
 - [ ] eww ?
 - [ ] ssh-agent
-- [ ] zoxide
+- [X] zoxide
 - [ ] file manager
 - [ ] Neovim
 - [ ] Bar - waybar
 - [ ] WiFi
 - [ ] Bluetooth
-- [ ] Launcher - rofi
+- [/] Launcher - rofi
 - [ ] Display Manager
 - [ ] Lock Screen
 - [ ] notification

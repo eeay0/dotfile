@@ -39,5 +39,8 @@ return {
         -- capabilities.offsetEncoding = "utf-8"
 
         vim.lsp.enable("lua_ls")
+        vim.lsp.enable("jsonls")
+        vim.lsp.enable("zls")
+        vim.lsp.enable("bashls")
     end,
 }

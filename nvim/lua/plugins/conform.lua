@@ -14,6 +14,9 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             markdown = { "prettier" },
+            zsh = { "beautysh" },
+            sh = { "shfmt" },
+            jsonc = { "prettier" },
         },
         default_format_opts = {
             lsp_format = "fallback",

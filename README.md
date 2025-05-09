@@ -1,8 +1,8 @@
 ## Road Map
 
 - [X] Neovim
-- [-] WezTerm
-- [ ] File Manager
+- [X] WezTerm
+- [X] yazi 
 - [ ] Waybar:
   - [ ] bluetooth
   - [ ] audio-music

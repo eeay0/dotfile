@@ -1,40 +1,83 @@
 return {
     "saghen/blink.cmp",
-    -- optional: provides snippets for the snippet source
+    event = { "BufRead", "BufNewFile" },
     dependencies = {
-        "rafamadriz/friendly-snippets",
+        {
+            "L3MON4D3/LuaSnip",
+            version = "v2.*",
+            build = "make install_jsregexp",
+            dependencies = { "rafamadriz/friendly-snippets" },
+        },
+        "onsails/lspkind.nvim",
+        "nvim-tree/nvim-web-devicons",
         {
             "Kaiser-Yang/blink-cmp-dictionary",
             dependencies = { "nvim-lua/plenary.nvim" },
         },
     },
-
-    -- use a release tag to download pre-built binaries
-    -- version = "*",
-    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    version = "1.*",
     build = "cargo build --release",
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
+    init = function() require("luasnip.loaders.from_vscode").lazy_load() end,
     opts = {
-        -- 'default' for mappings similar to built-in completion
-        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-        -- See the full "keymap" documentation for information on defining your own keymap.
         keymap = { preset = "enter" },
-
+        signature = {
+            enabled = true,
+            window = {
+                show_documentation = false,
+            },
+        },
         appearance = {
-            -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-            -- Useful for when your theme doesn't support blink.cmp
-            -- Will be removed in a future release
-            use_nvim_cmp_as_default = true,
-            -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-            -- Adjusts spacing to ensure icons are aligned
             nerd_font_variant = "mono",
         },
+        completion = {
+            documentation = { auto_show = false },
+            menu = {
+                draw = {
+                    components = {
+                        kind_icon = {
+                            text = function(ctx)
+                                local icon = ctx.kind_icon
+                                if
+                                    vim.tbl_contains(
+                                        { "Path" },
+                                        ctx.source_name
+                                    )
+                                then
+                                    local dev_icon, _ =
+                                        require("nvim-web-devicons").get_icon(
+                                            ctx.label
+                                        )
+                                    if dev_icon then icon = dev_icon end
+                                else
+                                    icon =
+                                        require("lspkind").symbolic(ctx.kind, {
+                                            mode = "symbol",
+                                        })
+                                end
 
-        -- Default list of enabled providers defined so that you can extend it
-        -- elsewhere in your config, without redefining it, due to `opts_extend`
+                                return icon .. ctx.icon_gap
+                            end,
+                            highlight = function(ctx)
+                                local hl = ctx.kind_hl
+                                if
+                                    vim.tbl_contains(
+                                        { "Path" },
+                                        ctx.source_name
+                                    )
+                                then
+                                    local dev_icon, dev_hl =
+                                        require("nvim-web-devicons").get_icon(
+                                            ctx.label
+                                        )
+                                    if dev_icon then hl = dev_hl end
+                                end
+                                return hl
+                            end,
+                        },
+                    },
+                },
+            },
+        },
         sources = {
             default = { "lsp", "path", "snippets", "buffer" },
             per_filetype = { markdown = { "dictionary" } },
@@ -90,55 +133,9 @@ return {
                         return out
                     end,
                 },
-                buffer = {
-                    -- keep case of first char
-                    transform_items = function(a, items)
-                        local keyword = a.get_keyword()
-                        local correct, case
-                        if keyword:match("^%l") then
-                            correct = "^%u%l+$"
-                            case = string.lower
-                        elseif keyword:match("^%u") then
-                            correct = "^%l+$"
-                            case = string.upper
-                        else
-                            return items
-                        end
-
-                        -- avoid duplicates from the corrections
-                        local seen = {}
-                        local out = {}
-                        for _, item in ipairs(items) do
-                            local raw = item.insertText
-                            if raw:match(correct) then
-                                local text = case(raw:sub(1, 1)) .. raw:sub(2)
-                                item.insertText = text
-                                item.label = text
-                            end
-                            if not seen[item.insertText] then
-                                seen[item.insertText] = true
-                                table.insert(out, item)
-                            end
-                        end
-                        return out
-                    end,
-                },
             },
         },
-
-        completion = {
-            menu = {
-                draw = {
-                    columns = {
-                        { "kind_icon" },
-                        { "label", "label_description", gap = 1 },
-                        { "source_name", "kind", gap = 1 },
-                    },
-                },
-            },
-            documentation = { auto_show = true, auto_show_delay_ms = 500 },
-        },
-        signature = { enabled = true },
+        fuzzy = { implementation = "rust" },
     },
     opts_extend = { "sources.default" },
 }

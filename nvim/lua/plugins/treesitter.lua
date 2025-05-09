@@ -6,26 +6,26 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter-context",
         },
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "markdown",
-                    "markdown_inline",
-                    "python",
-                    "fish",
-                    "bash",
-                    "c",
-                    "html",
-                    "css",
-                },
-                sync_install = true,
-                auto_install = true,
-                highlihght = { enable = true },
-            })
-        end,
+        opts = {
+            ensure_installed = {
+                "lua",
+                "vim",
+                "vimdoc",
+                "markdown",
+                "markdown_inline",
+                "python",
+                "bash",
+                "zsh",
+                "c",
+                "html",
+                "css",
+                "javascript",
+                "regex",
+            },
+            sync_install = true,
+            auto_install = true,
+            highlihght = { enable = true },
+        },
     },
     {
         "HiPhish/rainbow-delimiters.nvim",

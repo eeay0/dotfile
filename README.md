@@ -1,0 +1,22 @@
+## Road Map
+
+- [X] Neovim
+- [-] WezTerm
+- [ ] File Manager
+- [ ] Waybar:
+  - [ ] bluetooth
+  - [ ] audio-music
+  - [ ] wifi
+  - [ ] notification (also install necessary demons)
+  - [ ] calendar
+  - [ ] pomdoro
+- [ ] Rofi
+- [ ] Zsh:
+  - [ ] cli tools (fzf, fd, ripgrep)
+  - [ ] aliases
+- [ ] qmk
+- [ ] Display Manager
+- [ ] Lock Screen
+- [ ] mpv
+- [ ] ssh-agent
+- [ ] Neovim: Language specific configurations (debug etc.)
